@@ -1,0 +1,7 @@
+{
+  "name": "PKPPApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

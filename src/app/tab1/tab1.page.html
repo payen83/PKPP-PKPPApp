@@ -1,17 +1,64 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Inventory
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="!showScanner">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Inventory</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Add New Inventory</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Item Name</ion-label>
+        <ion-input [(ngModel)]="item.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Serial Number</ion-label>
+        <ion-input [(ngModel)]="item.serial_number"></ion-input>
+        <ion-button slot="end" color="success" (click)="scanQR()">Scan</ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select [(ngModel)]="item.category" placeholder="Select category">
+          <ion-select-option value="electronic">Electronic</ion-select-option>
+          <ion-select-option value="furniture">Furniture</ion-select-option>
+          <ion-select-option value="spare parts">Spare Parts</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea rows="3" [(ngModel)]="item.description"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button (click)="submit()">Submit</ion-button>
+    </div>
+
+    <ion-list>
+      <ion-item *ngFor="let item of inventory" button detail="true" (click)="viewDetail(item.item_id)">
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>Serial Number: {{ item.serial_number }}</p>
+        </ion-label>
+        <ion-note slot="end">{{ item.category }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
+<ion-footer *ngIf="showScanner">
+  <ion-button expand="full" fill="clear" (click)="cancel()">Cancel</ion-button>
+</ion-footer>

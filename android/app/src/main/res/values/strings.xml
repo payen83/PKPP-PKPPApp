@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PKPPApp</string>
+    <string name="title_activity_main">PKPPApp</string>
+    <string name="package_name">my.gov.pkppapp</string>
+    <string name="custom_url_scheme">my.gov.pkppapp</string>
+</resources>
